@@ -9,6 +9,12 @@
 # ================================================
 
 # TODO: Import and clean data
+
+install.packages(c("readxl", "jsonlite"))
+
+library(readxl)
+library(jsonlite)
+
 # Requirements:
 # 1. Import both CSV files
 # 2. Print the data and view
@@ -17,18 +23,12 @@
 # Import and prepare data
 # Store in: customer_data, loyalty_data
 
-# Recall that read.csv(file_name) is the function to import csv files into our programming environment.
-
-
-# Import data files
-customer_data <- # YOUR CODE HERE - customer_data.csv
-loyalty_data <- # YOUR CODE HERE - loyalty_data.csv
+customer_data <- read.csv("customer_data.csv")
+loyalty_data <- read.csv("loyalty_data.csv")
 
 # Print Customer Data
-# YOUR CODE HERE
-
-# Print Loyalty Data
-# YOUR CODE HERE
+print(customer_data)
+print (loyalty_data)
 
 # Check Customer Data Structure:
 print(str(customer_data))  # Check structure
@@ -46,15 +46,17 @@ print(str(customer_data))  # Check structure
 
 ### GRADED CHALLENGE 2 ###
 
-library(dplyr)
 # Filter Customer Data for Ages > 30
 # Store results in: Above_30
 
-Above_30 <- customer_data %>% filter(Age >  )
+install.packages("dplyr")
+library(dplyr)
+
+Above_30 <- customer_data %>% filter(Age > 30 )
 print(Above_30)
 
 # Filter Data for Female customers who bought Smoothies. Save in df_filtered
-df_filtered <- customer_data %>% filter(Product== ""  & Gender == ""  )
+df_filtered <- customer_data %>% filter(Product == "Smoothie"  & Gender == "Female"  )
 print(df_filtered)
 
 
@@ -76,6 +78,12 @@ print(df_filtered)
 
 # YOUR CODE HERE
 
+mutate(loyalty_data, Tier = case_when(
+    LoyaltyPoints < 200 ~ "Bronze", 
+    LoyaltyPoints < 500 ~ "Silver",
+    TRUE ~ "Gold"
+)
+)
 
 # ================================================
 # Graded Challenge 4: Report Generation
@@ -90,8 +98,8 @@ print(df_filtered)
 # Generate and save report
 # Save to df_selected to 'revised_customer_data.csv' and loyalty_data to revised_loyalty_data.csv
 
-write.csv( ,  , row.names = FALSE)
-write.csv( ,  , row.names = FALSE)
+write.csv(df_filtered , file = "revised_customer_data.csv", row.names = FALSE)
+write.csv(loyalty_data, file = "revised_loyalty_data" , row.names = FALSE)
 
 
 # ================================================
