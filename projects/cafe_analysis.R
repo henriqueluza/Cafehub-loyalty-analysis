@@ -20,7 +20,7 @@
     Above_30 <- customer_data %>% filter(Age > 30)
     print(head(Above_30))
 
-    df_filtered <- customer_data %>% filter(Product == "Smoothie" & Gender == "Female")
+    df_filtered <- customer_data %>% filter(Product == "Smoothie"& Gender == "Female")
     print(head(df_filtered))
 
     df_selected <- df_filtered %>% select(Age, Product)
